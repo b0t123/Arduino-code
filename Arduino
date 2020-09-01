@@ -1,0 +1,42 @@
+int ledPin = 5;
+int brightness = 0;
+int button1 = 6;
+
+
+
+
+
+void setup() {
+Serial.begin(9600);
+pinMode(ledPin, OUTPUT);
+pinMode(button1, INPUT_PULLUP);
+
+}
+
+void loop() {
+ delay(10);
+ //Serial.println(digitalRead(button1));
+ int thisPitch = map(brightness, 0,255,0,10000);
+ Serial.print(brightness);
+ Serial.print(',');
+ Serial.println(thisPitch);
+  if(digitalRead(button1)==LOW && brightness < 255)
+ {
+  brightness += 1;
+ }
+
+ if(digitalRead(button1)==HIGH && brightness > 0)
+ {
+  brightness -= 1;
+ }
+/*
+ if(brightness < 5)
+ {
+  tone(9, thisPitch, 10);
+ }*/
+ analogWrite(ledPin, brightness);
+ tone(3,thisPitch,10);
+
+
+
+ }
